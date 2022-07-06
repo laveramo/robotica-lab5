@@ -18,7 +18,7 @@ El archivo *ModuleJL.mod* es el módulo de RAPID usado para realizar la trayecto
 
 Luego, se crearon dos señales en Robot Studio de tipo Digital Input, con el nombre DI_01 y DI_02, ya que así es como están creadas en el controlador físico del robot IRB 140.
 
-Posteriormente, dentro del main se crea un IF, que tiene como condición (DI_01=1), que en casi de que esta se cumpla, se ejecuta la función J_inc y L_inc, las cuales corresponden a las trayectorias que dibujan la J y la L inclinadas, y luego se codfició otro IF, que verifica si (DI_02=1), y si está condición se cumple, se ejecuta la trayectoria plana (las funciones J y L). De la siguiente manera:
+Posteriormente, dentro del main se crea un IF, que tiene como condición (DI_01=1), de tal forma que al cumplirse dicha condición se ejecuta la función J_inc y L_inc, las cuales corresponden a las trayectorias que dibujan la J y la L inclinadas, y luego de manera estructurada se codfició otro IF, que verifica si (DI_02=1), y si está condición se cumple, se ejecuta la trayectoria plana (las funciones J y L). De la siguiente manera:
 
 ``` matlab
 IF DI_01=1 THEN  
@@ -39,7 +39,7 @@ El proceso llamado J contiene inicialmente una instrucción `MoveJ` hacia Home, 
 
 El proceso L, es similar al anterior, en este caso sólo se usan instrucciones `MoveL` debido a que no se necesitan curvas. Se repite el proceso de llevar la herramienta a un punto superior del punto final antes de llevarlo a Home, esto con la finalidad de no tener una pequeña marca antes de que se regrese a Home.
 
-Los puntos mencionados al inicio de esta sección fueron elaborados respecto al marco de referencia `prueba1`, a excepción del Home. De esta forma, para realizar la escritura de letras en el plano inclinado, simplemente se trasladó el origen del marco de referencia y se rotó según lo requerido para después repetir la ejecución del código, este nuevo workobject tiene como nombre "inclinado".
+Los puntos mencionados al inicio de esta sección fueron elaborados respecto al marco de referencia `prueba1`, a excepción del Home. De esta forma, para realizar la escritura de letras en el plano inclinado, simplemente se trasladó el origen del marco de referencia y se rotó según lo requerido para después repetir la ejecución del código, este nuevo workobject tiene como nombre "inclinado", dicho work object se aplicó a las trayectorias J_inc y L_inc.
 
 ## Simulación en Robotstudio e implementación con robot real
 
