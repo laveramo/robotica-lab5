@@ -33,6 +33,8 @@ ENDIF
 
 Es importante además mencionar que, para que la lógica funcione, el codigo debe ser corrido de manera continua, para ello se accedió a la configuración de ejecución de código, y se activo que fuese de manera continúa:
 
+![image.png](flex.png)
+
 El proceso llamado J contiene inicialmente una instrucción `MoveJ` hacia Home, luego una instrucción de este mismo tipo hacia el punto J_1, el cual es una de las esquinas de la letra J. A continuación se usan tanto instrucciones `MoveL` y `MoveC` para realizar esta letra y cuando termina, se traslada a un punto que está unos centímetros por encima del punto final, de esta forma, se podrá mover la herramienta al punto donde inicia la letra L. 
 
 El proceso L, es similar al anterior, en este caso sólo se usan instrucciones `MoveL` debido a que no se necesitan curvas. Se repite el proceso de llevar la herramienta a un punto superior del punto final antes de llevarlo a Home, esto con la finalidad de no tener una pequeña marca antes de que se regrese a Home.
@@ -45,6 +47,7 @@ Los puntos mencionados al inicio de esta sección fueron elaborados respecto al 
 
 # Conclusiones
 - Las señales son importantes para el control de procesos, es importante identificar el cableado de las mismas.
+- Es importante tener en cuenta el rebote que pueda existir en los botones que controlan las señales, para ello, Robot Studio ofrece filtros digitales que evitan estos rebotes 
 - Es importante hacer un uso útil de los workobjects en Robotstudio. En el caso de este laboratorio, al tener trayectorias elaboradas en un workobject distinto al del robot, fue sencillo hacer cambios en este al tener un plano superior al que inicialmente habíamos supuesto.
 - Se debe tener en cuenta en la programación en RAPID en qué módulos están contenidos los workobjects, puntos o información adicional necesaria para relizar las trayectorias. Es posible comenter errores y crear estos objetos en módulos separados y al momento de importar el módulo que contiene el código principal, no se encontrará los objetos que están en otros módulos.
 - A la hora de querer implementar una aplicación que involucre una celda robótica es imprescindible realizar las simulaciones para garantizar el buen funcionamiento de la celda. También es útil ejecutar el código línea por línea al momento de usar el robot real para evitar accidentes.
