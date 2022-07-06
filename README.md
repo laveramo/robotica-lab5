@@ -16,9 +16,22 @@ Luego de tener la herramienta construida, se procedió a hacer la calibración c
 ## Código en RAPID
 El archivo *ModuleJL.mod* es el módulo de RAPID usado para realizar la trayectoria del robot que permitía escribir las letras J y L. En la parte inicial del código se encuentra definida la herramienta m100 que fue calibrada anteriormente, los workobjects o sistemas de referencia `inclinado` y `prueba1`, inclinado es el workobject dónde se realizan las letras a 30 grados de la horizontal, mientras que prueba1 es el workobject de los robtarget de las trayectorias en el plano X-Y, y además, los robtargets que se usarían para construir las trayectorias de las letras (Home, J_1, J_2, ... , J_7, L_0, L_1, ... ,L_4).
 
-Luego, se crearon dos señales en Robot Studio de tipo Digital Input, con el nombre DI_01 Y DI_02, ya que así es como están creadas en el controlador físico del robot IRB 140.
+Luego, se crearon dos señales en Robot Studio de tipo Digital Input, con el nombre DI_01 y DI_02, ya que así es como están creadas en el controlador físico del robot IRB 140.
 
-Posteriormente, dentro del main se crea un IF, que tiene como condición (DI_01=1), se ejecute la función llamada J_inc y L_inc, las cuales corresponden a las trayectorias que dibujas la J y la L inclinadas, y otro IF, que verifique si (DI_02=1), y si está condición se cumple, se ejecuta la trayectoria plana. El proceso llamado J contiene inicialmente una instrucción `MoveJ` hacia Home, luego una instrucción de este mismo tipo hacia el punto J_1, el cual es una de las esquinas de la letra J. A continuación se usan tanto instrucciones `MoveL` y `MoveC` para realizar esta letra y cuando termina, se traslada a un punto que está unos centímetros por encima del punto final, de esta forma, se podrá mover la herramienta al punto donde inicia la letra L. 
+Posteriormente, dentro del main se crea un IF, que tiene como condición (DI_01=1), se ejecute la función llamada J_inc y L_inc, las cuales corresponden a las trayectorias que dibujas la J y la L inclinadas, y otro IF, que verifique si (DI_02=1), y si está condición se cumple, se ejecuta la trayectoria plana. De la siguiente manera:
+
+``` matlab
+IF DI_01=1 THEN  
+  J_inc;
+  L_inc;
+ENDIF
+IF DI_02=1 THEN  
+  J;
+	L;
+ENDIF
+```
+
+El proceso llamado J contiene inicialmente una instrucción `MoveJ` hacia Home, luego una instrucción de este mismo tipo hacia el punto J_1, el cual es una de las esquinas de la letra J. A continuación se usan tanto instrucciones `MoveL` y `MoveC` para realizar esta letra y cuando termina, se traslada a un punto que está unos centímetros por encima del punto final, de esta forma, se podrá mover la herramienta al punto donde inicia la letra L. 
 
 El proceso L, es similar al anterior, en este caso sólo se usan instrucciones `MoveL` debido a que no se necesitan curvas. Se repite el proceso de llevar la herramienta a un punto superior del punto final antes de llevarlo a Home, esto con la finalidad de no tener una pequeña marca antes de que se regrese a Home.
 
@@ -31,6 +44,7 @@ Los puntos mencionados al inicio de esta sección fueron elaborados respecto al 
 - Vídeo implementación con robot real en plano inclinado: https://youtube.com/shorts/0pYmCRa-8GM?feature=share
 
 # Conclusiones
+- Las señales son importantes para el control de procesos, es importante identificar el cableado de las mismas.
 - Es importante hacer un uso útil de los workobjects en Robotstudio. En el caso de este laboratorio, al tener trayectorias elaboradas en un workobject distinto al del robot, fue sencillo hacer cambios en este al tener un plano superior al que inicialmente habíamos supuesto.
 - Se debe tener en cuenta en la programación en RAPID en qué módulos están contenidos los workobjects, puntos o información adicional necesaria para relizar las trayectorias. Es posible comenter errores y crear estos objetos en módulos separados y al momento de importar el módulo que contiene el código principal, no se encontrará los objetos que están en otros módulos.
 - A la hora de querer implementar una aplicación que involucre una celda robótica es imprescindible realizar las simulaciones para garantizar el buen funcionamiento de la celda. También es útil ejecutar el código línea por línea al momento de usar el robot real para evitar accidentes.
