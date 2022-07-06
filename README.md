@@ -31,11 +31,13 @@ IF DI_02=1 THEN
 ENDIF
 ```
 
+Es importante además mencionar que, para que la lógica funcione, el codigo debe ser corrido de manera continua, para ello se accedió a la configuración de ejecución de código, y se activo que fuese de manera continúa:
+
 El proceso llamado J contiene inicialmente una instrucción `MoveJ` hacia Home, luego una instrucción de este mismo tipo hacia el punto J_1, el cual es una de las esquinas de la letra J. A continuación se usan tanto instrucciones `MoveL` y `MoveC` para realizar esta letra y cuando termina, se traslada a un punto que está unos centímetros por encima del punto final, de esta forma, se podrá mover la herramienta al punto donde inicia la letra L. 
 
 El proceso L, es similar al anterior, en este caso sólo se usan instrucciones `MoveL` debido a que no se necesitan curvas. Se repite el proceso de llevar la herramienta a un punto superior del punto final antes de llevarlo a Home, esto con la finalidad de no tener una pequeña marca antes de que se regrese a Home.
 
-Los puntos mencionados al inicio de esta sección fueron elaborados respecto al marco de referencia `prueba1`, a excepción del Home. De esta forma, para realizar la escritura de letras en el plano inclinado, simplemente se trasladó el origen del marco de referencia y se rotó según lo requerido para después repetir la ejecución del código.
+Los puntos mencionados al inicio de esta sección fueron elaborados respecto al marco de referencia `prueba1`, a excepción del Home. De esta forma, para realizar la escritura de letras en el plano inclinado, simplemente se trasladó el origen del marco de referencia y se rotó según lo requerido para después repetir la ejecución del código, este nuevo workobject tiene como nombre "inclinado".
 
 ## Simulación en Robotstudio e implementación con robot real
 
